@@ -1,17 +1,17 @@
-const directory = process.argv[2];
-const type = process.argv[3];
+const fs = require('fs');
 
-module.exports = (err, files) => {
-    if(err) {
-        console.log(err);
+module.exports = (dir, ext) => {
+    fs.readdir(dir, (err, files) => {
+        if(err) {
+            console.log("ERROR!!! " + err)
+        } else {
+            files.forEach(f => {
+                            const fileType = f.split(".")[1];
+                            if(fileType == ext){
+                                console.log(f);
+                            }
+                        });
+                    }
+        }    
+    )
     }
-    else {
-        files.forEach(f => {
-            const fileType = f.split(".");
-            if(fileType == type){
-                console.log(files[i]);
-            }
-        });
-    }
-};
-
